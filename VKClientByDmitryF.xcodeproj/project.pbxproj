@@ -16,6 +16,8 @@
 		4984E680248FF1650015F45A /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E67F248FF1650015F45A /* AuthService.swift */; };
 		4984E683248FF1D90015F45A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E682248FF1D90015F45A /* AuthViewController.swift */; };
 		4984E687248FF22A0015F45A /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4984E686248FF22A0015F45A /* Auth.storyboard */; };
+		4984E68A248FF4420015F45A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E689248FF4420015F45A /* FeedViewController.swift */; };
+		4984E68C248FF4510015F45A /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4984E68B248FF4510015F45A /* Feed.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +45,8 @@
 		4984E67F248FF1650015F45A /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		4984E682248FF1D90015F45A /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		4984E686248FF22A0015F45A /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		4984E689248FF4420015F45A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		4984E68B248FF4510015F45A /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		4984E663248FEBD30015F45A /* VKClientByDmitryF */ = {
 			isa = PBXGroup;
 			children = (
+				4984E688248FF4290015F45A /* FeedViewController */,
 				4984E681248FF1C70015F45A /* AuthViewController */,
 				4984E67E248FF14F0015F45A /* Services */,
 				4984E664248FEBD30015F45A /* AppDelegate.swift */,
@@ -111,6 +116,15 @@
 				4984E686248FF22A0015F45A /* Auth.storyboard */,
 			);
 			path = AuthViewController;
+			sourceTree = "<group>";
+		};
+		4984E688248FF4290015F45A /* FeedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4984E689248FF4420015F45A /* FeedViewController.swift */,
+				4984E68B248FF4510015F45A /* Feed.storyboard */,
+			);
+			path = FeedViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +189,7 @@
 			files = (
 				4984E687248FF22A0015F45A /* Auth.storyboard in Resources */,
 				4984E671248FEBD50015F45A /* LaunchScreen.storyboard in Resources */,
+				4984E68C248FF4510015F45A /* Feed.storyboard in Resources */,
 				4984E66E248FEBD50015F45A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +224,7 @@
 			files = (
 				4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */,
 				4984E683248FF1D90015F45A /* AuthViewController.swift in Sources */,
+				4984E68A248FF4420015F45A /* FeedViewController.swift in Sources */,
 				4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */,
 				4984E680248FF1650015F45A /* AuthService.swift in Sources */,
 			);
