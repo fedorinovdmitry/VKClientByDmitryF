@@ -18,6 +18,8 @@
 		4984E687248FF22A0015F45A /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4984E686248FF22A0015F45A /* Auth.storyboard */; };
 		4984E68A248FF4420015F45A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E689248FF4420015F45A /* FeedViewController.swift */; };
 		4984E68C248FF4510015F45A /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4984E68B248FF4510015F45A /* Feed.storyboard */; };
+		4984E68E248FF5C10015F45A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E68D248FF5C10015F45A /* NetworkService.swift */; };
+		4984E690248FF6180015F45A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E68F248FF6180015F45A /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +49,8 @@
 		4984E686248FF22A0015F45A /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		4984E689248FF4420015F45A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		4984E68B248FF4510015F45A /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
+		4984E68D248FF5C10015F45A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		4984E68F248FF6180015F45A /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				4984E67F248FF1650015F45A /* AuthService.swift */,
+				4984E68D248FF5C10015F45A /* NetworkService.swift */,
+				4984E68F248FF6180015F45A /* API.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -226,7 +232,9 @@
 				4984E683248FF1D90015F45A /* AuthViewController.swift in Sources */,
 				4984E68A248FF4420015F45A /* FeedViewController.swift in Sources */,
 				4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */,
+				4984E68E248FF5C10015F45A /* NetworkService.swift in Sources */,
 				4984E680248FF1650015F45A /* AuthService.swift in Sources */,
+				4984E690248FF6180015F45A /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
