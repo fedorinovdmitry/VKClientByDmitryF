@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E664248FEBD30015F45A /* AppDelegate.swift */; };
 		4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E666248FEBD30015F45A /* SceneDelegate.swift */; };
-		4984E669248FEBD30015F45A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E668248FEBD30015F45A /* ViewController.swift */; };
 		4984E66E248FEBD50015F45A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4984E66D248FEBD50015F45A /* Assets.xcassets */; };
 		4984E671248FEBD50015F45A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4984E66F248FEBD50015F45A /* LaunchScreen.storyboard */; };
 		4984E67B248FF09A0015F45A /* VKSdkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4984E67A248FF09A0015F45A /* VKSdkFramework.framework */; };
 		4984E67C248FF09A0015F45A /* VKSdkFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4984E67A248FF09A0015F45A /* VKSdkFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4984E680248FF1650015F45A /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E67F248FF1650015F45A /* AuthService.swift */; };
+		4984E683248FF1D90015F45A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E682248FF1D90015F45A /* AuthViewController.swift */; };
+		4984E687248FF22A0015F45A /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4984E686248FF22A0015F45A /* Auth.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,11 +36,13 @@
 		4984E661248FEBD30015F45A /* VKClientByDmitryF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClientByDmitryF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4984E664248FEBD30015F45A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4984E666248FEBD30015F45A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4984E668248FEBD30015F45A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4984E66D248FEBD50015F45A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4984E670248FEBD50015F45A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4984E672248FEBD50015F45A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4984E67A248FF09A0015F45A /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VKSdkFramework.framework; path = Carthage/Build/iOS/VKSdkFramework.framework; sourceTree = "<group>"; };
+		4984E67F248FF1650015F45A /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		4984E682248FF1D90015F45A /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		4984E686248FF22A0015F45A /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +77,10 @@
 		4984E663248FEBD30015F45A /* VKClientByDmitryF */ = {
 			isa = PBXGroup;
 			children = (
+				4984E681248FF1C70015F45A /* AuthViewController */,
+				4984E67E248FF14F0015F45A /* Services */,
 				4984E664248FEBD30015F45A /* AppDelegate.swift */,
 				4984E666248FEBD30015F45A /* SceneDelegate.swift */,
-				4984E668248FEBD30015F45A /* ViewController.swift */,
 				4984E66D248FEBD50015F45A /* Assets.xcassets */,
 				4984E66F248FEBD50015F45A /* LaunchScreen.storyboard */,
 				4984E672248FEBD50015F45A /* Info.plist */,
@@ -89,6 +94,23 @@
 				4984E67A248FF09A0015F45A /* VKSdkFramework.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4984E67E248FF14F0015F45A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4984E67F248FF1650015F45A /* AuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4984E681248FF1C70015F45A /* AuthViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4984E682248FF1D90015F45A /* AuthViewController.swift */,
+				4984E686248FF22A0015F45A /* Auth.storyboard */,
+			);
+			path = AuthViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4984E687248FF22A0015F45A /* Auth.storyboard in Resources */,
 				4984E671248FEBD50015F45A /* LaunchScreen.storyboard in Resources */,
 				4984E66E248FEBD50015F45A /* Assets.xcassets in Resources */,
 			);
@@ -184,9 +207,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4984E669248FEBD30015F45A /* ViewController.swift in Sources */,
 				4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */,
+				4984E683248FF1D90015F45A /* AuthViewController.swift in Sources */,
 				4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */,
+				4984E680248FF1650015F45A /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
