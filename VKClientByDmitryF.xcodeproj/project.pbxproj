@@ -20,6 +20,8 @@
 		4984E68C248FF4510015F45A /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4984E68B248FF4510015F45A /* Feed.storyboard */; };
 		4984E68E248FF5C10015F45A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E68D248FF5C10015F45A /* NetworkService.swift */; };
 		4984E690248FF6180015F45A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E68F248FF6180015F45A /* API.swift */; };
+		4984E6932490C0A30015F45A /* FeedResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E6922490C0A30015F45A /* FeedResponce.swift */; };
+		4984E6952490C7250015F45A /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E6942490C7250015F45A /* NetworkDataFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +53,8 @@
 		4984E68B248FF4510015F45A /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		4984E68D248FF5C10015F45A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4984E68F248FF6180015F45A /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		4984E6922490C0A30015F45A /* FeedResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResponce.swift; sourceTree = "<group>"; };
+		4984E6942490C7250015F45A /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,9 +112,11 @@
 		4984E67E248FF14F0015F45A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4984E6912490C0790015F45A /* Models */,
 				4984E67F248FF1650015F45A /* AuthService.swift */,
 				4984E68D248FF5C10015F45A /* NetworkService.swift */,
 				4984E68F248FF6180015F45A /* API.swift */,
+				4984E6942490C7250015F45A /* NetworkDataFetcher.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -131,6 +137,14 @@
 				4984E68B248FF4510015F45A /* Feed.storyboard */,
 			);
 			path = FeedViewController;
+			sourceTree = "<group>";
+		};
+		4984E6912490C0790015F45A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4984E6922490C0A30015F45A /* FeedResponce.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,11 +242,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4984E6932490C0A30015F45A /* FeedResponce.swift in Sources */,
 				4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */,
 				4984E683248FF1D90015F45A /* AuthViewController.swift in Sources */,
 				4984E68A248FF4420015F45A /* FeedViewController.swift in Sources */,
 				4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */,
 				4984E68E248FF5C10015F45A /* NetworkService.swift in Sources */,
+				4984E6952490C7250015F45A /* NetworkDataFetcher.swift in Sources */,
 				4984E680248FF1650015F45A /* AuthService.swift in Sources */,
 				4984E690248FF6180015F45A /* API.swift in Sources */,
 			);
