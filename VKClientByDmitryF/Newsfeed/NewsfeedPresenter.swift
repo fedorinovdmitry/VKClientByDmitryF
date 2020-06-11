@@ -19,13 +19,13 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
         switch response {
         case .presentNewsFeed(let feed):
 
-            let feedViewModel = FeedViewModel.init(cells: cells(from: feed))
+            let feedViewModel = FeedViewModel.init(cells: getCells(from: feed))
             
             viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel: feedViewModel))
         }
     }
     
-    private func cells(from feedResponce: FeedResponse) -> [FeedViewModel.Cell] {
+    private func getCells(from feedResponce: FeedResponse) -> [FeedViewModel.Cell] {
         
         let cells: [FeedViewModel.Cell] = feedResponce.items.map { feedItem in
             let id = feedItem.sourceId

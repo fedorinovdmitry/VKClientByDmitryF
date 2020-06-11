@@ -12,6 +12,7 @@
 		490172E42491FBFE00A1F973 /* NewsfeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172E32491FBFE00A1F973 /* NewsfeedCell.swift */; };
 		490172E62491FCFA00A1F973 /* NewsfeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490172E52491FCFA00A1F973 /* NewsfeedCell.xib */; };
 		490172E8249257AF00A1F973 /* DateFormater + RuDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172E7249257AF00A1F973 /* DateFormater + RuDate.swift */; };
+		490172EA24925F6600A1F973 /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172E924925F6600A1F973 /* WebImageView.swift */; };
 		4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E664248FEBD30015F45A /* AppDelegate.swift */; };
 		4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E666248FEBD30015F45A /* SceneDelegate.swift */; };
 		4984E66E248FEBD50015F45A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4984E66D248FEBD50015F45A /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		490172E32491FBFE00A1F973 /* NewsfeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsfeedCell.swift; sourceTree = "<group>"; };
 		490172E52491FCFA00A1F973 /* NewsfeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsfeedCell.xib; sourceTree = "<group>"; };
 		490172E7249257AF00A1F973 /* DateFormater + RuDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormater + RuDate.swift"; sourceTree = "<group>"; };
+		490172E924925F6600A1F973 /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
 		4984E661248FEBD30015F45A /* VKClientByDmitryF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClientByDmitryF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4984E664248FEBD30015F45A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4984E666248FEBD30015F45A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			children = (
 				490172E02491006B00A1F973 /* UIViewController + Stroryboard.swift */,
 				490172E7249257AF00A1F973 /* DateFormater + RuDate.swift */,
+				490172E924925F6600A1F973 /* WebImageView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				490172E42491FBFE00A1F973 /* NewsfeedCell.swift in Sources */,
 				4984E683248FF1D90015F45A /* AuthViewController.swift in Sources */,
 				490172E8249257AF00A1F973 /* DateFormater + RuDate.swift in Sources */,
+				490172EA24925F6600A1F973 /* WebImageView.swift in Sources */,
 				49C2F8102490E1DD00432082 /* NewsfeedPresenter.swift in Sources */,
 				49C2F8122490E1DD00432082 /* NewsfeedRouter.swift in Sources */,
 				4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */,
