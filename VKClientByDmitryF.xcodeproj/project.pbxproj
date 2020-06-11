@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		490172DE2490FECE00A1F973 /* NewsfeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 490172DD2490FECE00A1F973 /* NewsfeedViewController.storyboard */; };
 		490172E12491006B00A1F973 /* UIViewController + Stroryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172E02491006B00A1F973 /* UIViewController + Stroryboard.swift */; };
+		490172E42491FBFE00A1F973 /* NewsfeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172E32491FBFE00A1F973 /* NewsfeedCell.swift */; };
+		490172E62491FCFA00A1F973 /* NewsfeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490172E52491FCFA00A1F973 /* NewsfeedCell.xib */; };
 		4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E664248FEBD30015F45A /* AppDelegate.swift */; };
 		4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E666248FEBD30015F45A /* SceneDelegate.swift */; };
 		4984E66E248FEBD50015F45A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4984E66D248FEBD50015F45A /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		490172DD2490FECE00A1F973 /* NewsfeedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewsfeedViewController.storyboard; sourceTree = "<group>"; };
 		490172E02491006B00A1F973 /* UIViewController + Stroryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Stroryboard.swift"; sourceTree = "<group>"; };
+		490172E32491FBFE00A1F973 /* NewsfeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsfeedCell.swift; sourceTree = "<group>"; };
+		490172E52491FCFA00A1F973 /* NewsfeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsfeedCell.xib; sourceTree = "<group>"; };
 		4984E661248FEBD30015F45A /* VKClientByDmitryF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClientByDmitryF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4984E664248FEBD30015F45A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4984E666248FEBD30015F45A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +95,15 @@
 				490172E02491006B00A1F973 /* UIViewController + Stroryboard.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		490172E22491FBE100A1F973 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				490172E32491FBFE00A1F973 /* NewsfeedCell.swift */,
+				490172E52491FCFA00A1F973 /* NewsfeedCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		4984E658248FEBD30015F45A = {
@@ -176,6 +189,7 @@
 		49C2F8082490E12800432082 /* Newsfeed */ = {
 			isa = PBXGroup;
 			children = (
+				490172E22491FBE100A1F973 /* Cell */,
 				490172DD2490FECE00A1F973 /* NewsfeedViewController.storyboard */,
 				49C2F80D2490E1DD00432082 /* NewsfeedViewController.swift */,
 				49C2F80E2490E1DD00432082 /* NewsfeedInteractor.swift */,
@@ -252,6 +266,7 @@
 				490172DE2490FECE00A1F973 /* NewsfeedViewController.storyboard in Resources */,
 				4984E68C248FF4510015F45A /* Feed.storyboard in Resources */,
 				4984E66E248FEBD50015F45A /* Assets.xcassets in Resources */,
+				490172E62491FCFA00A1F973 /* NewsfeedCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +302,7 @@
 				49C2F8142490E1DD00432082 /* NewsfeedViewController.swift in Sources */,
 				490172E12491006B00A1F973 /* UIViewController + Stroryboard.swift in Sources */,
 				4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */,
+				490172E42491FBFE00A1F973 /* NewsfeedCell.swift in Sources */,
 				4984E683248FF1D90015F45A /* AuthViewController.swift in Sources */,
 				49C2F8102490E1DD00432082 /* NewsfeedPresenter.swift in Sources */,
 				4984E68A248FF4420015F45A /* FeedViewController.swift in Sources */,
