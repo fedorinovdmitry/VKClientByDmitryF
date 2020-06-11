@@ -34,7 +34,9 @@ class NewsfeedCell: UITableViewCell {
 
     
     // MARK: - IBOutlets
-
+    
+    @IBOutlet weak var cardView: UIView!
+    
     @IBOutlet weak var iconImageView: WebImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -52,6 +54,12 @@ class NewsfeedCell: UITableViewCell {
         super.awakeFromNib()
         iconImageView.layer.cornerRadius = iconImageView.frame.width / 2
         iconImageView.clipsToBounds = true
+        
+        cardView.layer.cornerRadius = 10
+        cardView.clipsToBounds = true
+        
+        backgroundColor = .clear
+        selectionStyle = .none
     }
     
     
