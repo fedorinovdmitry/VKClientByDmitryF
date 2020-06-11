@@ -13,13 +13,36 @@ protocol NewsfeedDisplayLogic: class {
 }
 
 class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
+    // MARK: - Custom types
+    
+    // MARK: - Constants
+    
+    // MARK: - Init
+    
+    // MARK: - LifeStyle ViewController
+    
+    // MARK: - IBAction
+    
+    // MARK: - Public methods
+    
+    // MARK: - Private methods
+    
+    // MARK: - Navigation
+
+    // MARK: - Public Properties
     
     var interactor: NewsfeedBusinessLogic?
     var router: (NSObjectProtocol & NewsfeedRoutingLogic)?
     
+    // MARK: - Private Properties
+    
+    private var feedViewModel = FeedViewModel.init(cells: [])
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var table: UITableView!
     
-    // MARK: Setup
+    // MARK: - Setup
     
     private func setup() {
         let viewController        = self
@@ -37,7 +60,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
     
     
     
-    // MARK: View lifecycle
+    // MARK: - LifeStyle ViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,15 +68,18 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
 //        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         table.register(UINib(nibName: "NewsfeedCell", bundle: nil), forCellReuseIdentifier: NewsfeedCell.reuseId)
         
+        interactor?.makeRequest(request: .getNewsFeed)
         
     }
     
+    // MARK: - Public methods
+    
     func displayData(viewModel: Newsfeed.Model.ViewModel.ViewModelData) {
         switch viewModel {
-        case .some:
-            print(".some ViewController")
-        case .displayNewsFeed:
-            print(".displayNewsFeed ViewController")
+        case .displayNewsFeed(let feedViewModel):
+            self.feedViewModel = feedViewModel
+            table.reloadData()
+
         }
     }
     
@@ -61,19 +87,22 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
 
 extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return feedViewModel.cells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedCell.reuseId, for: indexPath) as! NewsfeedCell
+        
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        cell.set(viewModel: cellViewModel)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("select row")
-        interactor?.makeRequest(request: .getFeed)
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 223
     }
