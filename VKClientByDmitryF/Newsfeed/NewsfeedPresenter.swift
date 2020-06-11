@@ -19,20 +19,31 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
         switch response {
         case .presentNewsFeed(let feed):
 
-            let cells = feed.items.map { cellViewModel(from: $0) }
-            let feedViewModel = FeedViewModel.init(cells: cells)
+            let feedViewModel = FeedViewModel.init(cells: cells(from: feed))
             
             viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel: feedViewModel))
         }
     }
     
+    private func cells(from feedResponce: FeedResponse) -> [FeedViewModel.Cell] {
+        
+        let cells: [FeedViewModel.Cell] = feedResponce.items.map { feedItem in
+            let id = feedItem.sourceId
+            let profile: ProfileRepresentable? =
+                id >= 0 ?
+                    feedResponce.profiles.first{ $0.id == id } :
+                    feedResponce.groups.first{ $0.id == abs(id) }
+            return cellViewModel(from: feedItem, profilesRepresentable: profile)
+        }
+        return cells
+    }
     
-    
-    private func cellViewModel(from feedItem: FeedItem) -> FeedViewModel.Cell {
+    private func cellViewModel(from feedItem: FeedItem, profilesRepresentable: ProfileRepresentable?) -> FeedViewModel.Cell {
+        
         return FeedViewModel.Cell.init(
-            iconUrlString: "",
-            name: "future name",
-            date: "future date",
+            iconUrlString: profilesRepresentable?.photo ?? "",
+            name: profilesRepresentable?.name ?? "no name",
+            date: DateFormatter.giveRuFormat(date: feedItem.date),
             text: feedItem.text,
             likes: String(feedItem.likes?.count ?? 0),
             comments: String(feedItem.comments?.count ?? 0),

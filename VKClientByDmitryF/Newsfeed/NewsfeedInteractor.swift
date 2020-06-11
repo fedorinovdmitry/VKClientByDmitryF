@@ -32,6 +32,7 @@ class NewsfeedInteractor: NewsfeedBusinessLogic {
                     let feedResponce = feedResponce,
                     let self = self
                     else { return }
+                
                 self.presenter?.presentData(response: .presentNewsFeed(feed: feedResponce))
             }
         }
