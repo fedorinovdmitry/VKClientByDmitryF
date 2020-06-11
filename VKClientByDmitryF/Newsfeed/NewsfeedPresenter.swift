@@ -48,6 +48,19 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
             likes: String(feedItem.likes?.count ?? 0),
             comments: String(feedItem.comments?.count ?? 0),
             shares: String(feedItem.reposts?.count ?? 0),
-            views: String(feedItem.views?.count ?? 0))
+            views: String(feedItem.views?.count ?? 0),
+            photoAttachement: photoAttachment(feedItem: feedItem))
+    }
+    
+    private func photoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedCellPhotoAttachment? {
+        guard
+            let photos = feedItem.attachments?.compactMap({ $0.photo }),
+            let firstPhoto = photos.first
+        else {
+            return nil
+        }
+        return FeedViewModel.FeedCellPhotoAttachment.init(photoUrlString: firstPhoto.srcBIG,
+                                                          width: firstPhoto.width,
+                                                          height: firstPhoto.height)
     }
 }

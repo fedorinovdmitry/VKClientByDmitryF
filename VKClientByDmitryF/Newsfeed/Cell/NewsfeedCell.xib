@@ -43,7 +43,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ezt-wy-auv">
-                        <rect key="frame" x="8" y="59" width="398" height="114"/>
+                        <rect key="frame" x="8" y="59" width="398" height="52"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -129,6 +129,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zJu-PD-tAX" customClass="WebImageView" customModule="VKClientByDmitryF" customModuleProvider="target">
+                        <rect key="frame" x="8" y="114" width="398" height="55"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -137,6 +141,7 @@
                 <outlet property="iconImageView" destination="4j3-ob-PgP" id="UNJ-eA-BtO"/>
                 <outlet property="likesLabel" destination="ije-06-UHF" id="G3r-7l-KOG"/>
                 <outlet property="nameLabel" destination="Aay-Tm-99j" id="1h8-1W-GY8"/>
+                <outlet property="postImageView" destination="zJu-PD-tAX" id="I5u-iu-HSm"/>
                 <outlet property="postLabel" destination="Ezt-wy-auv" id="7Ye-eZ-IwN"/>
                 <outlet property="sharesLabel" destination="oka-fM-lNM" id="2Gj-mo-RdW"/>
                 <outlet property="viewsLabel" destination="Yph-E9-7dS" id="rTP-pv-eHS"/>
