@@ -20,6 +20,8 @@ protocol FeedCellViewModel {
     var views: String? { get }
     
     var photoAttachement: FeedCellPhotoAttachmentViewModel? { get }
+    
+    var sizes: FeedCellSizes { get }
 }
 
 protocol FeedCellPhotoAttachmentViewModel {
@@ -28,6 +30,15 @@ protocol FeedCellPhotoAttachmentViewModel {
     var height: Int { get }
 }
 
+protocol FeedCellSizes {
+    var postLabelFrame: CGRect { get }
+    var attachmentFrame: CGRect { get }
+    var bottomViewFrame: CGRect { get }
+    var totalHeight: CGFloat { get }
+}
+
+
+
 class NewsfeedCell: UITableViewCell {
     
     static let reuseId = "NewsfeedCell"
@@ -35,8 +46,10 @@ class NewsfeedCell: UITableViewCell {
     
     // MARK: - IBOutlets
     
+    
     @IBOutlet weak var cardView: UIView!
     
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var iconImageView: WebImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -44,6 +57,7 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet weak var postLabel: UILabel!
     @IBOutlet weak var postImageView: WebImageView!
     
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var sharesLabel: UILabel!
@@ -61,7 +75,10 @@ class NewsfeedCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
     }
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        postLabel.sizeToFit()
+    }
     
     func set(viewModel: FeedCellViewModel) {
         
@@ -69,17 +86,55 @@ class NewsfeedCell: UITableViewCell {
         nameLabel.text = viewModel.name
         dateLabel.text = viewModel.date
         
-        postLabel.text = viewModel.text
-        if let photoAttachment = viewModel.photoAttachement {
-            postImageView.isHidden = false
-            postImageView.set(imageURL: photoAttachment.photoUrlString)
-        } else {
-            postImageView.isHidden = true
-        }
+        
+        configPostLabel(with: viewModel.text, and: viewModel.sizes.postLabelFrame)
+        configPostImageView(with: viewModel.photoAttachement, and: viewModel.sizes.attachmentFrame)
+        
+//        bottomView.removeAllConstraints()
+        bottomView.frame = viewModel.sizes.bottomViewFrame
         
         likesLabel.text = viewModel.likes
         commentsLabel.text = viewModel.comments
         sharesLabel.text = viewModel.shares
         viewsLabel.text = viewModel.views
+    }
+    
+    private func configPostLabel(with text: String?, and frame: CGRect) {
+        postLabel.text = text
+        postLabel.frame = frame
+    }
+    
+    private func configPostImageView(with photoAttachment: FeedCellPhotoAttachmentViewModel?, and frame: CGRect) {
+        if let photoAttachment = photoAttachment {
+            postImageView.isHidden = false
+            postImageView.set(imageURL: photoAttachment.photoUrlString)
+        } else {
+            postImageView.isHidden = true
+        }
+        postImageView.frame = frame
+    }
+}
+extension UIView {
+
+    public func removeAllConstraints() {
+        var _superview = self.superview
+
+        while let superview = _superview {
+            for constraint in superview.constraints {
+
+                if let first = constraint.firstItem as? UIView, first == self {
+                    superview.removeConstraint(constraint)
+                }
+
+                if let second = constraint.secondItem as? UIView, second == self {
+                    superview.removeConstraint(constraint)
+                }
+            }
+
+            _superview = superview.superview
+        }
+
+        self.removeConstraints(self.constraints)
+        self.translatesAutoresizingMaskIntoConstraints = true
     }
 }

@@ -15,6 +15,8 @@
 		490172EA24925F6600A1F973 /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172E924925F6600A1F973 /* WebImageView.swift */; };
 		490172ED249274F600A1F973 /* PhotoAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172EC249274F500A1F973 /* PhotoAttachment.swift */; };
 		490172EF2492755F00A1F973 /* ProfileAndGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172EE2492755F00A1F973 /* ProfileAndGroup.swift */; };
+		490172F12493599600A1F973 /* NewsfeedCellLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172F02493599600A1F973 /* NewsfeedCellLayoutCalculator.swift */; };
+		490172F32493755100A1F973 /* String + Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490172F22493755100A1F973 /* String + Height.swift */; };
 		4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E664248FEBD30015F45A /* AppDelegate.swift */; };
 		4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984E666248FEBD30015F45A /* SceneDelegate.swift */; };
 		4984E66E248FEBD50015F45A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4984E66D248FEBD50015F45A /* Assets.xcassets */; };
@@ -59,6 +61,8 @@
 		490172E924925F6600A1F973 /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
 		490172EC249274F500A1F973 /* PhotoAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAttachment.swift; sourceTree = "<group>"; };
 		490172EE2492755F00A1F973 /* ProfileAndGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAndGroup.swift; sourceTree = "<group>"; };
+		490172F02493599600A1F973 /* NewsfeedCellLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsfeedCellLayoutCalculator.swift; sourceTree = "<group>"; };
+		490172F22493755100A1F973 /* String + Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Height.swift"; sourceTree = "<group>"; };
 		4984E661248FEBD30015F45A /* VKClientByDmitryF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClientByDmitryF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4984E664248FEBD30015F45A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4984E666248FEBD30015F45A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 				490172E02491006B00A1F973 /* UIViewController + Stroryboard.swift */,
 				490172E7249257AF00A1F973 /* DateFormater + RuDate.swift */,
 				490172E924925F6600A1F973 /* WebImageView.swift */,
+				490172F22493755100A1F973 /* String + Height.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			children = (
 				490172E32491FBFE00A1F973 /* NewsfeedCell.swift */,
 				490172E52491FCFA00A1F973 /* NewsfeedCell.xib */,
+				490172F02493599600A1F973 /* NewsfeedCellLayoutCalculator.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -304,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4984E6932490C0A30015F45A /* FeedResponse.swift in Sources */,
+				490172F32493755100A1F973 /* String + Height.swift in Sources */,
 				49C2F8142490E1DD00432082 /* NewsfeedViewController.swift in Sources */,
 				490172E12491006B00A1F973 /* UIViewController + Stroryboard.swift in Sources */,
 				4984E665248FEBD30015F45A /* AppDelegate.swift in Sources */,
@@ -317,6 +324,7 @@
 				4984E667248FEBD30015F45A /* SceneDelegate.swift in Sources */,
 				4984E68E248FF5C10015F45A /* NetworkService.swift in Sources */,
 				490172EF2492755F00A1F973 /* ProfileAndGroup.swift in Sources */,
+				490172F12493599600A1F973 /* NewsfeedCellLayoutCalculator.swift in Sources */,
 				49C2F8132490E1DD00432082 /* NewsfeedModels.swift in Sources */,
 				4984E6952490C7250015F45A /* NetworkDataFetcher.swift in Sources */,
 				49C2F8112490E1DD00432082 /* NewsfeedWorker.swift in Sources */,

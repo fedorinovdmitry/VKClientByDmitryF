@@ -13,7 +13,9 @@ protocol NewsfeedPresentationLogic {
 }
 
 class NewsfeedPresenter: NewsfeedPresentationLogic {
+    
     weak var viewController: NewsfeedDisplayLogic?
+    var cellLayoutCalculator: FeedCellLayoutCalculatorProtocol = FeedCellLayoutCalculator()
     
     func presentData(response: Newsfeed.Model.Response.ResponseType) {
         switch response {
@@ -40,6 +42,9 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
     
     private func cellViewModel(from feedItem: FeedItem, profilesRepresentable: ProfileRepresentable?) -> FeedViewModel.Cell {
         
+        let photoAttachement = photoAttachment(feedItem: feedItem)
+        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, photoAttachment: photoAttachement)
+        
         return FeedViewModel.Cell.init(
             iconUrlString: profilesRepresentable?.photo ?? "",
             name: profilesRepresentable?.name ?? "no name",
@@ -49,7 +54,9 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
             comments: String(feedItem.comments?.count ?? 0),
             shares: String(feedItem.reposts?.count ?? 0),
             views: String(feedItem.views?.count ?? 0),
-            photoAttachement: photoAttachment(feedItem: feedItem))
+            photoAttachement: photoAttachement,
+            sizes: sizes
+        )
     }
     
     private func photoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedCellPhotoAttachment? {
@@ -63,4 +70,6 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
                                                           width: firstPhoto.width,
                                                           height: firstPhoto.height)
     }
+    
+    
 }
