@@ -14,7 +14,10 @@ class WebImageView: UIImageView {
         guard
             let imageURL = imageURL,
             let url = URL(string: imageURL)
-            else { return }
+            else {
+                self.image = nil
+                return
+        }
         
         if let cashedResponse = URLCache.shared.cachedResponse(for: URLRequest(url: url)) {
             self.image = UIImage(data: cashedResponse.data)

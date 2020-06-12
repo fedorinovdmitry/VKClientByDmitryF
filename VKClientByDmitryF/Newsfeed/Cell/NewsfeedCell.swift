@@ -46,7 +46,6 @@ class NewsfeedCell: UITableViewCell {
     
     // MARK: - IBOutlets
     
-    
     @IBOutlet weak var cardView: UIView!
     
     @IBOutlet weak var topView: UIView!
@@ -63,7 +62,10 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet weak var sharesLabel: UILabel!
     @IBOutlet weak var viewsLabel: UILabel!
     
-    
+    override func prepareForReuse() {
+        iconImageView.set(imageURL: nil)
+        postImageView.set(imageURL: nil)
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         iconImageView.layer.cornerRadius = iconImageView.frame.width / 2
@@ -90,7 +92,7 @@ class NewsfeedCell: UITableViewCell {
         configPostLabel(with: viewModel.text, and: viewModel.sizes.postLabelFrame)
         configPostImageView(with: viewModel.photoAttachement, and: viewModel.sizes.attachmentFrame)
         
-//        bottomView.removeAllConstraints()
+
         bottomView.frame = viewModel.sizes.bottomViewFrame
         
         likesLabel.text = viewModel.likes
@@ -112,29 +114,5 @@ class NewsfeedCell: UITableViewCell {
             postImageView.isHidden = true
         }
         postImageView.frame = frame
-    }
-}
-extension UIView {
-
-    public func removeAllConstraints() {
-        var _superview = self.superview
-
-        while let superview = _superview {
-            for constraint in superview.constraints {
-
-                if let first = constraint.firstItem as? UIView, first == self {
-                    superview.removeConstraint(constraint)
-                }
-
-                if let second = constraint.secondItem as? UIView, second == self {
-                    superview.removeConstraint(constraint)
-                }
-            }
-
-            _superview = superview.superview
-        }
-
-        self.removeConstraints(self.constraints)
-        self.translatesAutoresizingMaskIntoConstraints = true
     }
 }

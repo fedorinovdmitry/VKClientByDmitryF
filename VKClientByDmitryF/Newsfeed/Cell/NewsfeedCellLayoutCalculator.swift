@@ -47,23 +47,31 @@ final class FeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
         
         // MARK: Work with attachment Frame
         
-        let attachY = Constants.postLabelInsets.top + postLabelFrame.height + Constants.postLabelInsets.bottom
+        let attachY = postLabelFrame.size == CGSize.zero ?
+        Constants.postLabelInsets.top : postLabelFrame.maxY + Constants.postLabelInsets.bottom
+        
         var attachmentFrame = CGRect(origin: CGPoint(x: CGFloat(0),
                                                      y: attachY),
                                      size: CGSize.zero)
         
         if let photoAttachment = photoAttachment {
-            let widthPhoto = photoAttachment.width
-            let aspectRatio = CGFloat(widthPhoto) / cardViewWidth
-            let height = CGFloat(photoAttachment.height) / aspectRatio
+            let aspectRatio = CGFloat(photoAttachment.width) / CGFloat(photoAttachment.height)
+            let height = cardViewWidth / aspectRatio
             attachmentFrame.size = CGSize(width: cardViewWidth, height: height)
         }
         
         // MARK: Work with bottomView Frame
         
-        let bottomViewFrame = CGRect(x: CGFloat(0), y: attachY + attachmentFrame.height, width: cardViewWidth, height: Constants.bottomViewHeight)
+        let bottomViewFrame = CGRect(x: CGFloat(0),
+                                     y: max(postLabelFrame.maxY,
+                                            attachmentFrame.maxY),
+                                     width: cardViewWidth,
+                                     height: Constants.bottomViewHeight)
         
-        let totalHeight = attachY + attachmentFrame.height + Constants.bottomViewHeight + Constants.cardViewInsets.bottom
+        
+        // MARK: Work with totalHeight
+        
+        let totalHeight = bottomViewFrame.maxY + Constants.cardViewInsets.bottom
         
         
         return Sizes(postLabelFrame: postLabelFrame,
