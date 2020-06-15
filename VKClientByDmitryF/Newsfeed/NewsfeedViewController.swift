@@ -13,21 +13,6 @@ protocol NewsfeedDisplayLogic: class {
 }
 
 class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
-    // MARK: - Custom types
-    
-    // MARK: - Constants
-    
-    // MARK: - Init
-    
-    // MARK: - LifeStyle ViewController
-    
-    // MARK: - IBAction
-    
-    // MARK: - Public methods
-    
-    // MARK: - Private methods
-    
-    // MARK: - Navigation
 
     // MARK: - Public Properties
     
@@ -36,7 +21,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
     
     // MARK: - Private Properties
     
-    private var feedViewModel = FeedViewModel.init(cells: [])
+    private var feedViewModel = NewsfeedViewModel.init(cells: [])
     
     // MARK: - Outlets
     
@@ -90,6 +75,8 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
     
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
+
 extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return feedViewModel.cells.count
@@ -101,6 +88,7 @@ extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.set(viewModel: cellViewModel)
+        cell.delegate = self
         
         return cell
     }
@@ -113,4 +101,24 @@ extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cellViewModel = feedViewModel.cells[indexPath.row]
         return cellViewModel.sizes.totalHeight
     }
+    
+    //позволяет отложить рассчет высоты сложных ячеек с загрузки до прокрутки
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        return cellViewModel.sizes.totalHeight
+    }
+}
+
+// MARK: - NewsfeedCodeCellDelegate
+
+extension NewsfeedViewController: NewsfeedCodeCellDelegate {
+    func revealPost(for cell: NewsfeedCodeCell) {
+        
+        guard let indexPath = table.indexPath(for: cell) else { return }
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        
+        
+        interactor?.makeRequest(request: .revealPost(id: cellViewModel.postId))
+    }
+    
 }

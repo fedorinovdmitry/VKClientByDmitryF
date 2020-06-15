@@ -8,12 +8,23 @@
 
 import UIKit
 
+protocol NewsfeedCodeCellDelegate: class {
+    func revealPost(for cell: NewsfeedCodeCell)
+}
+
 final class NewsfeedCodeCell: UITableViewCell {
     
     static let reuseId = "NewsfeedCodeCell"
     
+    weak var delegate: NewsfeedCodeCellDelegate?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        backgroundColor = .clear
+        selectionStyle = .none
+        
+        moreTextButton.addTarget(self, action: #selector(moreTextButtonTouch), for: .touchUpInside)
         
         overlayFirstLayer()
         overlaySecondLayer()
@@ -28,37 +39,48 @@ final class NewsfeedCodeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //для того чтобы ячейки при перелистовывании были пустыми
+    override func prepareForReuse() {
+        iconImageView.set(imageURL: nil)
+        postImageView.set(imageURL: nil)
+    }
+    
+    @objc private func moreTextButtonTouch() {
+        delegate?.revealPost(for: self)
+    }
+    
     // MARK: - Setup Cell
-
-        func set(viewModel: FeedCellViewModel) {
-            
-            iconImageView.set(imageURL: viewModel.iconUrlString)
-            nameLabel.text = viewModel.name
-            dateLabel.text = viewModel.date
-            
-            configPostLabel(with: viewModel.text, and: viewModel.sizes.postLabelFrame)
-            configPostImageView(with: viewModel.photoAttachement, and: viewModel.sizes.attachmentFrame)
-            
-            likesLabel.text = viewModel.likes
-            commentsLabel.text = viewModel.comments
-            sharesLabel.text = viewModel.shares
-            viewsLabel.text = viewModel.views
-        }
+    
+    func set(viewModel: NewsfeedCellViewModel) {
         
-        private func configPostLabel(with text: String?, and frame: CGRect) {
-            postLabel.text = text
-            postLabel.frame = frame
-        }
+        iconImageView.set(imageURL: viewModel.iconUrlString)
+        nameLabel.text = viewModel.name
+        dateLabel.text = viewModel.date
         
-        private func configPostImageView(with photoAttachment: FeedCellPhotoAttachmentViewModel?, and frame: CGRect) {
-            if let photoAttachment = photoAttachment {
-                postImageView.isHidden = false
-                postImageView.set(imageURL: photoAttachment.photoUrlString)
-            } else {
-                postImageView.isHidden = true
-            }
-            postImageView.frame = frame
+        configPostLabel(with: viewModel.text, and: viewModel.sizes.postLabelFrame)
+        moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
+        configPostImageView(with: viewModel.photoAttachement, and: viewModel.sizes.attachmentFrame)
+        
+        likesLabel.text = viewModel.likes
+        commentsLabel.text = viewModel.comments
+        sharesLabel.text = viewModel.shares
+        viewsLabel.text = viewModel.views
+    }
+    
+    private func configPostLabel(with text: String?, and frame: CGRect) {
+        postLabel.text = text
+        postLabel.frame = frame
+    }
+    
+    private func configPostImageView(with photoAttachment: NewsfeedCellPhotoAttachmentViewModel?, and frame: CGRect) {
+        if let photoAttachment = photoAttachment {
+            postImageView.isHidden = false
+            postImageView.set(imageURL: photoAttachment.photoUrlString)
+        } else {
+            postImageView.isHidden = true
         }
+        postImageView.frame = frame
+    }
     
     // MARK: - First layer
 
@@ -102,6 +124,16 @@ final class NewsfeedCodeCell: UITableViewCell {
         return label
     }()
     
+    let moreTextButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        button.setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.contentVerticalAlignment = .center
+        button.setTitle("Показать полностью...", for: .normal)
+        return button
+    }()
+    
     let postImageView: WebImageView = {
         let imageView = WebImageView()
         return imageView
@@ -119,6 +151,7 @@ final class NewsfeedCodeCell: UITableViewCell {
         
         cardView.addSubviews(views: [topView,
                                      postLabel,
+                                     moreTextButton,
                                      postImageView,
                                      bottomView])
         
@@ -129,6 +162,9 @@ final class NewsfeedCodeCell: UITableViewCell {
         topView.heightAnchor.constraint(equalToConstant: NewsfeedCellConstants.topViewHeight).isActive = true
         
         // postLabel constraints
+        // this view support autosizing ... look in FeedCellLayoutCalculator
+        
+        // moreTextButton constraints
         // this view support autosizing ... look in FeedCellLayoutCalculator
         
         // postImageView constraints

@@ -15,37 +15,41 @@ protocol NewsfeedPresentationLogic {
 class NewsfeedPresenter: NewsfeedPresentationLogic {
     
     weak var viewController: NewsfeedDisplayLogic?
-    var cellLayoutCalculator: FeedCellLayoutCalculatorProtocol = FeedCellLayoutCalculator()
+    var cellLayoutCalculator: NewsfeedCellLayoutCalculator = NewsfeedCellLayoutCalculatorImpl()
     
     func presentData(response: Newsfeed.Model.Response.ResponseType) {
         switch response {
-        case .presentNewsFeed(let feed):
+        case .presentNewsFeed(let feed, let postId):
 
-            let feedViewModel = FeedViewModel.init(cells: getCells(from: feed))
+            let feedViewModel = NewsfeedViewModel.init(cells: getCells(from: feed, with: postId))
             
             viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel: feedViewModel))
         }
     }
     
-    private func getCells(from feedResponce: FeedResponse) -> [FeedViewModel.Cell] {
+    private func getCells(from feedResponce: FeedResponse, with revealPostIds: [Int]) -> [NewsfeedViewModel.Cell] {
         
-        let cells: [FeedViewModel.Cell] = feedResponce.items.map { feedItem in
+        let cells: [NewsfeedViewModel.Cell] = feedResponce.items.map { feedItem in
             let id = feedItem.sourceId
             let profile: ProfileRepresentable? =
                 id >= 0 ?
                     feedResponce.profiles.first{ $0.id == id } :
                     feedResponce.groups.first{ $0.id == abs(id) }
-            return cellViewModel(from: feedItem, profilesRepresentable: profile)
+            
+            let isFullSized = revealPostIds.contains(feedItem.postId)
+            
+            return cellViewModel(from: feedItem, profilesRepresentable: profile, isFullSizedPost: isFullSized)
         }
         return cells
     }
     
-    private func cellViewModel(from feedItem: FeedItem, profilesRepresentable: ProfileRepresentable?) -> FeedViewModel.Cell {
+    private func cellViewModel(from feedItem: FeedItem, profilesRepresentable: ProfileRepresentable?, isFullSizedPost: Bool) -> NewsfeedViewModel.Cell {
         
         let photoAttachement = photoAttachment(feedItem: feedItem)
-        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, photoAttachment: photoAttachement)
+        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, photoAttachment: photoAttachement, isFullSizedPost: isFullSizedPost)
         
-        return FeedViewModel.Cell.init(
+        return NewsfeedViewModel.Cell.init(
+            postId: feedItem.postId,
             iconUrlString: profilesRepresentable?.photo ?? "",
             name: profilesRepresentable?.name ?? "no name",
             date: DateFormatter.giveRuFormat(date: feedItem.date),
@@ -59,14 +63,14 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
         )
     }
     
-    private func photoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedCellPhotoAttachment? {
+    private func photoAttachment(feedItem: FeedItem) -> NewsfeedViewModel.NewsfeedCellPhotoAttachment? {
         guard
             let photos = feedItem.attachments?.compactMap({ $0.photo }),
             let firstPhoto = photos.first
         else {
             return nil
         }
-        return FeedViewModel.FeedCellPhotoAttachment.init(photoUrlString: firstPhoto.srcBIG,
+        return NewsfeedViewModel.NewsfeedCellPhotoAttachment.init(photoUrlString: firstPhoto.srcBIG,
                                                           width: firstPhoto.width,
                                                           height: firstPhoto.height)
     }
