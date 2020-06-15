@@ -60,7 +60,7 @@ class NewsfeedCell: UITableViewCell {
         
         
         configPostLabel(with: viewModel.text, and: viewModel.sizes.postLabelFrame)
-        configPostImageView(with: viewModel.photoAttachement, and: viewModel.sizes.attachmentFrame)
+        configPostImageView(with: viewModel.photoAttachements, and: viewModel.sizes.attachmentFrame)
         
 
 
@@ -76,8 +76,8 @@ class NewsfeedCell: UITableViewCell {
         postLabel.frame = frame
     }
     
-    private func configPostImageView(with photoAttachment: NewsfeedCellPhotoAttachmentViewModel?, and frame: CGRect) {
-        if let photoAttachment = photoAttachment {
+    private func configPostImageView(with photoAttachments: [NewsfeedCellPhotoAttachmentViewModel], and frame: CGRect) {
+        if let photoAttachment = photoAttachments.first {
             postImageView.isHidden = false
             postImageView.set(imageURL: photoAttachment.photoUrlString)
         } else {

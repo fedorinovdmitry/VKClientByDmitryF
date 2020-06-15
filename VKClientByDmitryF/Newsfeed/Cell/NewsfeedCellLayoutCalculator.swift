@@ -10,7 +10,7 @@ import UIKit
 
 protocol NewsfeedCellLayoutCalculator {
     func sizes(postText: String?,
-               photoAttachment: NewsfeedCellPhotoAttachmentViewModel?,
+               photoAttachments: [NewsfeedCellPhotoAttachmentViewModel],
                isFullSizedPost: Bool) -> NewsfeedCellSizes
 }
 
@@ -31,7 +31,7 @@ final class NewsfeedCellLayoutCalculatorImpl: NewsfeedCellLayoutCalculator {
     }
     
     func sizes(postText: String?,
-               photoAttachment: NewsfeedCellPhotoAttachmentViewModel?,
+               photoAttachments: [NewsfeedCellPhotoAttachmentViewModel],
                isFullSizedPost: Bool) -> NewsfeedCellSizes {
         
         var showMoreTextButton = false
@@ -79,7 +79,7 @@ final class NewsfeedCellLayoutCalculatorImpl: NewsfeedCellLayoutCalculator {
                                                      y: attachY),
                                      size: CGSize.zero)
         
-        if let photoAttachment = photoAttachment {
+        if let photoAttachment = photoAttachments.first {
             let aspectRatio = CGFloat(photoAttachment.width) / CGFloat(photoAttachment.height)
             let height = cardViewWidth / aspectRatio
             attachmentFrame.size = CGSize(width: cardViewWidth, height: height)

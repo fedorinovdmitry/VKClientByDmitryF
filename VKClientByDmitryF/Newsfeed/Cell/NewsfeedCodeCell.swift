@@ -59,7 +59,7 @@ final class NewsfeedCodeCell: UITableViewCell {
         
         configPostLabel(with: viewModel.text, and: viewModel.sizes.postLabelFrame)
         moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
-        configPostImageView(with: viewModel.photoAttachement, and: viewModel.sizes.attachmentFrame)
+        configPostImageView(with: viewModel.photoAttachements, and: viewModel.sizes.attachmentFrame)
         
         likesLabel.text = viewModel.likes
         commentsLabel.text = viewModel.comments
@@ -72,14 +72,22 @@ final class NewsfeedCodeCell: UITableViewCell {
         postLabel.frame = frame
     }
     
-    private func configPostImageView(with photoAttachment: NewsfeedCellPhotoAttachmentViewModel?, and frame: CGRect) {
-        if let photoAttachment = photoAttachment {
+    private func configPostImageView(with photoAttachments: [NewsfeedCellPhotoAttachmentViewModel], and frame: CGRect) {
+        if let photoAttachment = photoAttachments.first, photoAttachments.count == 1 {
             postImageView.isHidden = false
             postImageView.set(imageURL: photoAttachment.photoUrlString)
+            postImageView.frame = frame
+            galeryCollectionView.isHidden = true
+        } else if photoAttachments.count > 1 {
+            galeryCollectionView.frame = frame
+            postImageView.isHidden = true
+            galeryCollectionView.isHidden = false
+            galeryCollectionView.set(photos: photoAttachments)
         } else {
             postImageView.isHidden = true
+            galeryCollectionView.isHidden = true
         }
-        postImageView.frame = frame
+        
     }
     
     // MARK: - First layer
@@ -134,6 +142,8 @@ final class NewsfeedCodeCell: UITableViewCell {
         return button
     }()
     
+    let galeryCollectionView = GalleryCollectionView()
+    
     let postImageView: WebImageView = {
         let imageView = WebImageView()
         return imageView
@@ -152,6 +162,7 @@ final class NewsfeedCodeCell: UITableViewCell {
         cardView.addSubviews(views: [topView,
                                      postLabel,
                                      moreTextButton,
+                                     galeryCollectionView,
                                      postImageView,
                                      bottomView])
         
@@ -162,13 +173,16 @@ final class NewsfeedCodeCell: UITableViewCell {
         topView.heightAnchor.constraint(equalToConstant: NewsfeedCellConstants.topViewHeight).isActive = true
         
         // postLabel constraints
-        // this view support autosizing ... look in FeedCellLayoutCalculator
+        // this view support autosizing ... look in NewsfeedCellLayoutCalculatorImpl
         
         // moreTextButton constraints
-        // this view support autosizing ... look in FeedCellLayoutCalculator
+        // this view support autosizing ... look in NewsfeedCellLayoutCalculatorImpl
+        
+        // galeryCollectionView constraints
+        // this view support autosizing ... look in NewsfeedCellLayoutCalculatorImpl
         
         // postImageView constraints
-        // this view support autosizing ... look in FeedCellLayoutCalculator
+        // this view support autosizing ... look in NewsfeedCellLayoutCalculatorImpl
     
         // bottomView constraints
         bottomView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor).isActive = true

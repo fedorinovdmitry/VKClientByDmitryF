@@ -45,8 +45,8 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
     
     private func cellViewModel(from feedItem: FeedItem, profilesRepresentable: ProfileRepresentable?, isFullSizedPost: Bool) -> NewsfeedViewModel.Cell {
         
-        let photoAttachement = photoAttachment(feedItem: feedItem)
-        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, photoAttachment: photoAttachement, isFullSizedPost: isFullSizedPost)
+        let photoAttachements = photoAttachments(feedItem: feedItem)
+        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, photoAttachments: photoAttachements, isFullSizedPost: isFullSizedPost)
         
         return NewsfeedViewModel.Cell.init(
             postId: feedItem.postId,
@@ -58,7 +58,7 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
             comments: String(feedItem.comments?.count ?? 0),
             shares: String(feedItem.reposts?.count ?? 0),
             views: String(feedItem.views?.count ?? 0),
-            photoAttachement: photoAttachement,
+            photoAttachements: photoAttachements,
             sizes: sizes
         )
     }
@@ -73,6 +73,16 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
         return NewsfeedViewModel.NewsfeedCellPhotoAttachment.init(photoUrlString: firstPhoto.srcBIG,
                                                           width: firstPhoto.width,
                                                           height: firstPhoto.height)
+    }
+    
+    private func photoAttachments(feedItem: FeedItem) -> [NewsfeedViewModel.NewsfeedCellPhotoAttachment] {
+        guard let attachments = feedItem.attachments else { return [] }
+        return attachments.compactMap { (attachment) -> NewsfeedViewModel.NewsfeedCellPhotoAttachment? in
+            guard let photo = attachment.photo else { return nil }
+            return NewsfeedViewModel.NewsfeedCellPhotoAttachment.init(photoUrlString: photo.srcBIG,
+                                                                      width: photo.width,
+                                                                      height: photo.height)
+        }
     }
     
     

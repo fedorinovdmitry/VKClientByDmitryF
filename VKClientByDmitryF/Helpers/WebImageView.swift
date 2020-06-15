@@ -10,6 +10,14 @@ import UIKit
 
 class WebImageView: UIImageView {
     
+    override var image: UIImage? {
+        didSet {
+            if image == nil {
+                image = UIImage(named: "noPhoto")
+            }
+        }
+    }
+    
     func set(imageURL: String?) {
         guard
             let imageURL = imageURL,

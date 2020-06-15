@@ -19,7 +19,7 @@ protocol NewsfeedCellViewModel {
     var shares: String? { get }
     var views: String? { get }
     
-    var photoAttachement: NewsfeedCellPhotoAttachmentViewModel? { get }
+    var photoAttachements: [NewsfeedCellPhotoAttachmentViewModel] { get }
     
     var sizes: NewsfeedCellSizes { get }
 }
