@@ -20,35 +20,26 @@ final class FeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
         self.screenWidth = screenWidth
     }
     
-    struct Constants {
-        static let cardViewInsets = UIEdgeInsets(top: 0, left: 8, bottom: 12, right: 8)
-        static let topViewHeight: CGFloat = 44
-        static let postLabelInsets = UIEdgeInsets(top: 3 + topViewHeight + 8, left: 8, bottom: 8, right: 8)
-        static let postLabelFont = UIFont.systemFont(ofSize: 15)
-        static let bottomViewHeight: CGFloat = 46
-    }
-    
-    
     func sizes(postText: String?, photoAttachment: FeedCellPhotoAttachmentViewModel?) -> FeedCellSizes {
         
-        let cardViewWidth = screenWidth - Constants.cardViewInsets.left - Constants.cardViewInsets.right
+        let cardViewWidth = screenWidth - NewsfeedCellConstants.cardViewInsets.left - NewsfeedCellConstants.cardViewInsets.right
         
         // MARK: Work with postLabel Frame
         
-        var postLabelFrame = CGRect(origin: CGPoint(x: Constants.postLabelInsets.left,
-                                                    y: Constants.postLabelInsets.top),
+        var postLabelFrame = CGRect(origin: CGPoint(x: NewsfeedCellConstants.postLabelInsets.left,
+                                                    y: NewsfeedCellConstants.postLabelInsets.top),
                                     size: CGSize.zero)
         
         if let text = postText, !text.isEmpty {
-            let width = cardViewWidth - Constants.postLabelInsets.left - Constants.postLabelInsets.right
-            let height = text.height(width: width, font: Constants.postLabelFont)
+            let width = cardViewWidth - NewsfeedCellConstants.postLabelInsets.left - NewsfeedCellConstants.postLabelInsets.right
+            let height = text.height(width: width, font: NewsfeedCellConstants.postLabelFont)
             postLabelFrame.size = CGSize(width: width, height: height)
         }
         
         // MARK: Work with attachment Frame
         
         let attachY = postLabelFrame.size == CGSize.zero ?
-        Constants.postLabelInsets.top : postLabelFrame.maxY + Constants.postLabelInsets.bottom
+        NewsfeedCellConstants.postLabelInsets.top : postLabelFrame.maxY + NewsfeedCellConstants.postLabelInsets.bottom
         
         var attachmentFrame = CGRect(origin: CGPoint(x: CGFloat(0),
                                                      y: attachY),
@@ -59,24 +50,14 @@ final class FeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
             let height = cardViewWidth / aspectRatio
             attachmentFrame.size = CGSize(width: cardViewWidth, height: height)
         }
-        
-        // MARK: Work with bottomView Frame
-        
-        let bottomViewFrame = CGRect(x: CGFloat(0),
-                                     y: max(postLabelFrame.maxY,
-                                            attachmentFrame.maxY),
-                                     width: cardViewWidth,
-                                     height: Constants.bottomViewHeight)
-        
-        
+
         // MARK: Work with totalHeight
         
-        let totalHeight = bottomViewFrame.maxY + Constants.cardViewInsets.bottom
+        let totalHeight = max(postLabelFrame.maxY, attachmentFrame.maxY) + NewsfeedCellConstants.bottomViewHeight + NewsfeedCellConstants.cardViewInsets.bottom
         
         
         return Sizes(postLabelFrame: postLabelFrame,
                      attachmentFrame: attachmentFrame,
-                     bottomViewFrame: bottomViewFrame,
                      totalHeight: totalHeight)
         
     }
@@ -85,7 +66,7 @@ final class FeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
         var postLabelFrame: CGRect
         var attachmentFrame: CGRect
         
-        var bottomViewFrame: CGRect
+//        var bottomViewFrame: CGRect
         var totalHeight: CGFloat
     }
     

@@ -33,11 +33,8 @@ protocol FeedCellPhotoAttachmentViewModel {
 protocol FeedCellSizes {
     var postLabelFrame: CGRect { get }
     var attachmentFrame: CGRect { get }
-    var bottomViewFrame: CGRect { get }
     var totalHeight: CGFloat { get }
 }
-
-
 
 class NewsfeedCell: UITableViewCell {
     
@@ -93,7 +90,7 @@ class NewsfeedCell: UITableViewCell {
         configPostImageView(with: viewModel.photoAttachement, and: viewModel.sizes.attachmentFrame)
         
 
-        bottomView.frame = viewModel.sizes.bottomViewFrame
+
         
         likesLabel.text = viewModel.likes
         commentsLabel.text = viewModel.comments
