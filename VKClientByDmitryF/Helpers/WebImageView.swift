@@ -47,7 +47,4 @@ class WebImageView: UIImageView {
         let cashedResponse = CachedURLResponse(response: response, data: data)
         URLCache.shared.storeCachedResponse(cashedResponse, for: URLRequest(url: responseURL))
     }
-    
-    
-    
 }

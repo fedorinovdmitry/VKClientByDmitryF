@@ -81,8 +81,20 @@ final class NewsfeedCellLayoutCalculatorImpl: NewsfeedCellLayoutCalculator {
         
         if let photoAttachment = photoAttachments.first {
             let aspectRatio = CGFloat(photoAttachment.width) / CGFloat(photoAttachment.height)
-            let height = cardViewWidth / aspectRatio
-            attachmentFrame.size = CGSize(width: cardViewWidth, height: height)
+            if photoAttachments.count == 1 {
+                let height = cardViewWidth / aspectRatio
+                attachmentFrame.size = CGSize(width: cardViewWidth, height: height)
+            } else {
+                var photos = [CGSize]()
+                for photo in photoAttachments {
+                    let photoSize = CGSize(width: CGFloat(photo.width), height: CGFloat(photo.height))
+                    photos.append(photoSize)
+                }
+                let rowHeight = GalleryRowLayout.rowHeightCounter(superviewWidth: cardViewWidth,
+                                                                  photosArray: photos)
+                attachmentFrame.size = CGSize(width: cardViewWidth, height: rowHeight!)
+                
+            }
         }
 
         // MARK: Work with totalHeight

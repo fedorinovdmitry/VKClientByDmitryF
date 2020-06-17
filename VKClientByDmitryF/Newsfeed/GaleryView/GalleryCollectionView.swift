@@ -13,25 +13,33 @@ class GalleryCollectionView: UICollectionView {
     var photos = [NewsfeedCellPhotoAttachmentViewModel]()
     
     init() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        let layout = GalleryRowLayout()
         super.init(frame: .zero, collectionViewLayout: layout)
+        layout.delegate = self
         
         delegate = self
         dataSource = self
         register(GaleryCollectioViewCell.self, forCellWithReuseIdentifier: GaleryCollectioViewCell.reuseId)
-        backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        backgroundColor = UIColor.white
+        
+        showsHorizontalScrollIndicator = false
+        showsVerticalScrollIndicator = false
     }
     
     func set(photos: [NewsfeedCellPhotoAttachmentViewModel]) {
         self.photos = photos
+        contentOffset = CGPoint.zero
         reloadData()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+
 extension GalleryCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
@@ -44,4 +52,16 @@ extension GalleryCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         cell.set(imageUrl: photos[indexPath.row].photoUrlString)
         return cell
     }
+}
+
+// MARK: - RowLayoutDelegate
+
+extension GalleryCollectionView: RowLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, photoAt indexPath: IndexPath) -> CGSize {
+        let width = photos[indexPath.row].width
+        let height = photos[indexPath.row].height
+        
+        return CGSize(width: width, height: height)
+    }
+    
 }

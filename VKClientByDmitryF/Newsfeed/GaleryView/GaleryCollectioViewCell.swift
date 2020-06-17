@@ -15,8 +15,8 @@ class GaleryCollectioViewCell: UICollectionViewCell {
     let imageView: WebImageView = {
         let imageV = WebImageView()
         imageV.translatesAutoresizingMaskIntoConstraints = false
-        imageV.contentMode = .scaleAspectFit
-        imageV.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        imageV.contentMode = .scaleAspectFill
+        imageV.backgroundColor = #colorLiteral(red: 0.8901960784, green: 0.8980392157, blue: 0.9098039216, alpha: 1)
         return imageV
     }()
     
@@ -24,7 +24,6 @@ class GaleryCollectioViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         addSubview(imageView)
-        backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         
         //imageView constaints
         imageView.fillSuperview()
@@ -32,6 +31,15 @@ class GaleryCollectioViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         imageView.image = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 10
+        self.layer.shadowRadius = 3
+        self.layer.shadowOpacity = 0.4
+        self.layer.shadowOffset = CGSize(width: 2.5, height: 4)
     }
     
     func set(imageUrl: String?) {
