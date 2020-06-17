@@ -16,7 +16,7 @@ class NetworkService: Networking {
     
     
     func request(path: String, params: [String : String], completion: @escaping (Data?, Error?) -> Void) {
-        let url = self.url(from: API.newsFeed, params: params)
+        let url = self.url(from: path, params: params)
         print(url)
         
         let request = URLRequest(url: url)
@@ -44,7 +44,7 @@ class NetworkService: Networking {
         
         components.scheme = API.scheme // это протокол - https://
         components.host = API.host // адрес api.vk.com
-        components.path = API.newsFeed // к какому методу мы обращаемся /method/users.get
+        components.path = path // к какому методу мы обращаемся /method/users.get
         
         components.queryItems = allParams.map { URLQueryItem(name: $0, value: $1) } // параметры метода ?user_ids=210700286&fields=bdate&access_token=533bacf01e11f55b536a565b57531ac114461ae8736d6506a3&v=5.107
 

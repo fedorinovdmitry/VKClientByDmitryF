@@ -20,10 +20,11 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
     func presentData(response: Newsfeed.Model.Response.ResponseType) {
         switch response {
         case .presentNewsFeed(let feed, let postId):
-
             let feedViewModel = NewsfeedViewModel.init(cells: getCells(from: feed, with: postId))
-            
             viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel: feedViewModel))
+        case .presentUserInfo(let user):
+            let userViewModel = UserViewModel.init(photoUrlString: user?.photo100)
+            viewController?.displayData(viewModel: .displayUser(userViewMode: userViewModel))
         }
     }
     

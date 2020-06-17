@@ -37,7 +37,12 @@ class NewsfeedInteractor: NewsfeedBusinessLogic {
         case .revealPost(let postId):
             revealPostIds.append(postId)
             presentFeed()
+        case .getUser:
+            fetcher.getUser { [weak self] (userResponce) in
+                self?.presenter?.presentData(response: .presentUserInfo(userInfo: userResponce))
+            }
         }
+        
     }
     private func presentFeed() {
         guard let feedResponce = feedResponce else { return }

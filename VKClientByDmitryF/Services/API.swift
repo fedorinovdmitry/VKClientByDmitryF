@@ -14,6 +14,9 @@ struct API {
     static let version = "5.107"
     
     static let newsFeed = "/method/newsfeed.get"
+    static let user = "/method/users.get"
     
     static let token = SceneDelegate.shared().authService.token
+    static let userId = SceneDelegate.shared().authService.userId
+    
 }

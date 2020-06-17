@@ -37,6 +37,7 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(loginButton)
+        authService.wakeUpSession()
     }
     
     @objc private func logIn() {

@@ -22,6 +22,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
     // MARK: - Private Properties
     
     private var feedViewModel = NewsfeedViewModel.init(cells: [])
+    private var titleView = TitleView()
     
     // MARK: - Outlets
     
@@ -43,14 +44,13 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
     
     // MARK: Routing
     
-    
-    
     // MARK: - LifeStyle ViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-
+        setupTopBars()
+        
         table.register(UINib(nibName: "NewsfeedCell", bundle: nil), forCellReuseIdentifier: NewsfeedCell.reuseId)
         table.register(NewsfeedCodeCell.self, forCellReuseIdentifier: NewsfeedCodeCell.reuseId)
         table.separatorStyle = .none
@@ -58,7 +58,14 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
         view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         
         interactor?.makeRequest(request: .getNewsFeed)
+        interactor?.makeRequest(request: .getUser)
+    }
+    
+    private func setupTopBars() {
+        self.navigationController?.hidesBarsOnSwipe = true //скрывает при пролистывание вниз
         
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.titleView = titleView
     }
     
     // MARK: - Public methods
@@ -68,7 +75,9 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
         case .displayNewsFeed(let feedViewModel):
             self.feedViewModel = feedViewModel
             table.reloadData()
-
+        case .displayUser(let userViewModel):
+            self.titleView.set(userViewModel: userViewModel)
+            
         }
     }
     
