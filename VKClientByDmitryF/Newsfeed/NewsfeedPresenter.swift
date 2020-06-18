@@ -54,14 +54,26 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
             iconUrlString: profilesRepresentable?.photo ?? "",
             name: profilesRepresentable?.name ?? "no name",
             date: DateFormatter.giveRuFormat(date: feedItem.date),
-            text: feedItem.text,
-            likes: String(feedItem.likes?.count ?? 0),
-            comments: String(feedItem.comments?.count ?? 0),
-            shares: String(feedItem.reposts?.count ?? 0),
-            views: String(feedItem.views?.count ?? 0),
+            text: feedItem.text?.replacingOccurrences(of: "<br>", with: "\n"),
+            likes: formattedCounter(feedItem.likes?.count),
+            comments: formattedCounter(feedItem.comments?.count),
+            shares: formattedCounter(feedItem.reposts?.count),
+            views: formattedCounter(feedItem.views?.count),
             photoAttachements: photoAttachements,
             sizes: sizes
         )
+    }
+    
+    private func formattedCounter(_ counter: Int?) -> String {
+        guard let counter = counter, counter > 0 else { return "" }
+        var counterStr = String(counter)
+        if (4...6).contains(counterStr.count) {
+            counterStr = String(counterStr.dropLast(3)) + "K"
+        } else if counterStr.count > 6 {
+            counterStr = String(counterStr.dropLast(6)) + "M"
+        }
+        
+        return counterStr
     }
     
     private func photoAttachment(feedItem: FeedItem) -> NewsfeedViewModel.NewsfeedCellPhotoAttachment? {

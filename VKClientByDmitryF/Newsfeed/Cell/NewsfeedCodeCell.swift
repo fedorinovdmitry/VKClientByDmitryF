@@ -68,8 +68,8 @@ final class NewsfeedCodeCell: UITableViewCell {
     }
     
     private func configPostLabel(with text: String?, and frame: CGRect) {
-        postLabel.text = text
-        postLabel.frame = frame
+        postTextView.text = text
+        postTextView.frame = frame
     }
     
     private func configPostImageView(with photoAttachments: [NewsfeedCellPhotoAttachmentViewModel], and frame: CGRect) {
@@ -123,14 +123,22 @@ final class NewsfeedCodeCell: UITableViewCell {
         return view
     }()
     
-    let postLabel: UILabel = {
-        let label = UILabel()
+    let postTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = NewsfeedCellConstants.postLabelFont
+        textView.isScrollEnabled = false
+        textView.isSelectable = true
+        textView.isUserInteractionEnabled = true
+        textView.isEditable = false
         
-        label.numberOfLines = 0
-        label.font = NewsfeedCellConstants.postLabelFont
-        label.textColor = #colorLiteral(red: 0.1764705882, green: 0.1803921569, blue: 0.1764705882, alpha: 1)
-        return label
+        //делаем отступы как у лейбла
+        let padding = textView.textContainer.lineFragmentPadding
+        textView.textContainerInset = UIEdgeInsets.init(top: 0, left: -padding, bottom: 0, right: -padding)
+        
+        textView.dataDetectorTypes = UIDataDetectorTypes.all
+        return textView
     }()
+    
     
     let moreTextButton: UIButton = {
         let button = UIButton()
@@ -160,7 +168,7 @@ final class NewsfeedCodeCell: UITableViewCell {
     private func overlaySecondLayer() {
         
         cardView.addSubviews(views: [topView,
-                                     postLabel,
+                                     postTextView,
                                      moreTextButton,
                                      galeryCollectionView,
                                      postImageView,

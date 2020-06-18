@@ -43,7 +43,7 @@ class InsertableTextField: UITextField {
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
         var rect = super.leftViewRect(forBounds: bounds)
         rect.origin.x = 12
-        print(rect.width)
+        
         return rect
     }
 }
