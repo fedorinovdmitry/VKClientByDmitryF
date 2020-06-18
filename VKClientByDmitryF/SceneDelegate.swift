@@ -7,18 +7,40 @@
 //
 
 import UIKit
+import VKSdkFramework
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    static func shared() -> SceneDelegate {
+        let scene = UIApplication.shared.connectedScenes.first
+        let sceneDelegate: SceneDelegate = (scene?.delegate as? SceneDelegate)!
+        return sceneDelegate
+    }
     var window: UIWindow?
 
+    var authService: AuthService!
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene,
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions) {
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-
-        window?.rootViewController = ViewController(nibName: nil, bundle: nil)
+        
+        authService = AuthService()
+        authService.delegate = self
+        
+        let authVC = UIStoryboard(name: "Auth", bundle: nil).instantiateInitialViewController() as? AuthViewController
+        window?.rootViewController = authVC
         window?.makeKeyAndVisible()
+        
+        
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            VKSdk.processOpen(url, fromApplication: UIApplication.OpenURLOptionsKey.sourceApplication.rawValue)
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -52,3 +74,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+// MARK: - AuthServiceDelegate
+
+extension SceneDelegate: AuthServiceDelegate {
+    func authServiceShouldShow(viewController: UIViewController) {
+        print(#function)
+        window?.rootViewController?.present(viewController, animated: true, completion: nil)
+    }
+    
+    func authServiceSignIn() {
+        print(#function)
+        let feedVC: NewsfeedViewController = NewsfeedViewController.loadFromStoryboard()
+        let navVC = UINavigationController(rootViewController: feedVC)
+        window?.rootViewController = navVC
+    }
+    
+    func authServiceSignInDidFail() {
+        print(#function)
+    }
+    
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NOH-Lj-TH3">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Auth View Controller-->
+        <scene sceneID="Byn-Tp-s8l">
+            <objects>
+                <viewController id="NOH-Lj-TH3" customClass="AuthViewController" customModule="VKClientByDmitryF" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x7l-QN-mYs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VkLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eoO-lP-IEe">
+                                <rect key="frame" x="0.0" y="44" width="414" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="285" id="Fur-Nw-WUw"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.53259927029999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="eoO-lP-IEe" firstAttribute="top" secondItem="Nom-ST-39S" secondAttribute="top" id="8Ec-Dc-U6m"/>
+                            <constraint firstItem="eoO-lP-IEe" firstAttribute="leading" secondItem="x7l-QN-mYs" secondAttribute="leading" id="Ku9-2P-nVL"/>
+                            <constraint firstItem="eoO-lP-IEe" firstAttribute="centerX" secondItem="x7l-QN-mYs" secondAttribute="centerX" id="cQe-fH-3Iz"/>
+                            <constraint firstAttribute="trailing" secondItem="eoO-lP-IEe" secondAttribute="trailing" id="cvD-uM-UzP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Nom-ST-39S"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="eoO-lP-IEe" id="sRZ-oN-9ot"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8TY-SS-0rm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10.144927536231885" y="-32.142857142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="VkLogo" width="600" height="400"/>
+    </resources>
+</document>
