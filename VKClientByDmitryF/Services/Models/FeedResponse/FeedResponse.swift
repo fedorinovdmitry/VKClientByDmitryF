@@ -26,15 +26,17 @@ struct FeedResponse: Decodable {
         
         items = lhs.items + rhs.items
         
-        let filteredProfileRhs = lhs.profiles.filter { (oldProfile) -> Bool in
-            !rhs.profiles.contains(where: { $0.id == oldProfile.id})
-        }
-        profiles = lhs.profiles + filteredProfileRhs
+//        let filteredProfileRhs = lhs.profiles.filter { (oldProfile) -> Bool in
+//            !rhs.profiles.contains(where: { $0.id == oldProfile.id})
+//        }
+//        profiles = lhs.profiles + filteredProfileRhs
+        profiles = lhs.profiles + rhs.profiles
         
-        let filteredGroupsRhs = lhs.groups.filter { (oldGroup) -> Bool in
-            !rhs.groups.contains(where: { $0.id == oldGroup.id})
-        }
-        groups = lhs.groups + filteredGroupsRhs
+//        let filteredGroupsRhs = lhs.groups.filter { (oldGroup) -> Bool in
+//            !rhs.groups.contains(where: { $0.id == oldGroup.id})
+//        }
+//        groups = lhs.groups + filteredGroupsRhs
+        groups = lhs.groups + rhs.groups
         
         return FeedResponse(items: items, profiles: profiles, groups: groups, nextFrom: nextFrom)
     }

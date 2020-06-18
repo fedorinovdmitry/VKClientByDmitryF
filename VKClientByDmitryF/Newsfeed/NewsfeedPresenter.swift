@@ -20,11 +20,15 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
     func presentData(response: Newsfeed.Model.Response.ResponseType) {
         switch response {
         case .presentNewsFeed(let feed, let postId):
-            let feedViewModel = NewsfeedViewModel.init(cells: getCells(from: feed, with: postId))
+            let cells = getCells(from: feed, with: postId)
+            let footerTitle = String.localizedStringWithFormat(NSLocalizedString("newsfeed cells count", comment: ""), cells.count)
+            let feedViewModel = NewsfeedViewModel.init(cells: cells, footerTitle: footerTitle)
             viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel: feedViewModel))
         case .presentUserInfo(let user):
             let userViewModel = UserViewModel.init(photoUrlString: user?.photo100)
             viewController?.displayData(viewModel: .displayUser(userViewMode: userViewModel))
+        case .presentFooterLoader:
+            viewController?.displayData(viewModel: .displayFooterLoader)
         }
     }
     

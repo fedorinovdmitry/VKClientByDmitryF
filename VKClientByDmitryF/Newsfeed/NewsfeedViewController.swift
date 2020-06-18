@@ -21,8 +21,10 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
     
     // MARK: - Private Properties
     
-    private var feedViewModel = NewsfeedViewModel.init(cells: [])
+    private var feedViewModel = NewsfeedViewModel.init(cells: [], footerTitle: nil)
+    
     private var titleView = TitleView()
+    private lazy var footerView = FooterView()
     
     private var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -73,6 +75,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
         table.backgroundColor = .clear
         
         table.addSubview(refreshControl)
+        table.tableFooterView = footerView
     }
     
     private func setupTopBars() {
@@ -92,10 +95,13 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
         switch viewModel {
         case .displayNewsFeed(let feedViewModel):
             self.feedViewModel = feedViewModel
+            footerView.setTitle(feedViewModel.footerTitle)
             table.reloadData()
             refreshControl.endRefreshing()
         case .displayUser(let userViewModel):
             self.titleView.set(userViewModel: userViewModel)
+        case .displayFooterLoader:
+            footerView.showLoader()
             
         }
     }
@@ -138,6 +144,7 @@ extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
     // отслеживаем пролистывания ленты до конца
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView.contentOffset.y > scrollView.contentSize.height / 1.1 {
+            
             interactor?.makeRequest(request: .getNextBatch)
         }
     }
