@@ -15,38 +15,41 @@ protocol NewsfeedBusinessLogic {
 class NewsfeedInteractor: NewsfeedBusinessLogic {
     
     var presenter: NewsfeedPresentationLogic?
-    var service: NewsfeedService?
-    
-    private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
-    
-    private var feedResponce: FeedResponse?
-    private var revealPostIds = [Int]()
+    var service: NewsfeedNetworkService?
     
     func makeRequest(request: Newsfeed.Model.Request.RequestType) {
         if service == nil {
-            service = NewsfeedService()
+            service = NewsfeedNetworkService()
         }
         
         switch request {
+            
         case .getNewsFeed:
-            fetcher.getFeed { [weak self] (feedResponce) in
-                guard let self = self else { return }
-                self.feedResponce = feedResponce
-                self.presentFeed()
-            }
-        case .revealPost(let postId):
-            revealPostIds.append(postId)
-            presentFeed()
+            service?.getFeed(completion: { [weak self] (feed, postIds) in
+                self?.presenter?.presentData(
+                    response: .presentNewsFeed(feed: feed,
+                                               revealedPostIds: postIds))
+            })
+        case .revealPost(let id):
+            service?.revealPostIds(forPostId: id,
+                                   completion: { [weak self] (feed, revealPostIds) in
+                self?.presenter?.presentData(
+                    response: .presentNewsFeed(feed: feed,
+                                               revealedPostIds: revealPostIds))
+            })
         case .getUser:
-            fetcher.getUser { [weak self] (userResponce) in
-                self?.presenter?.presentData(response: .presentUserInfo(userInfo: userResponce))
-            }
+            service?.getUser(completion: { [weak self] (user) in
+                self?.presenter?.presentData(response: .presentUserInfo(userInfo: user))
+            })
+        case .getNextBatch:
+            print("batch")
+            service?.getNextBatch(completion: { [weak self] (feed, postIds) in
+                self?.presenter?.presentData(
+                    response: .presentNewsFeed(feed: feed,
+                                               revealedPostIds: postIds))
+            })
         }
         
-    }
-    private func presentFeed() {
-        guard let feedResponce = feedResponce else { return }
-        presenter?.presentData(response: .presentNewsFeed(feed: feedResponce, revealedPostIds: revealPostIds))
     }
     
 }

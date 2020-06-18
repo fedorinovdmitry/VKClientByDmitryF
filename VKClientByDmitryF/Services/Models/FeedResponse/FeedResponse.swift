@@ -16,6 +16,28 @@ struct FeedResponse: Decodable {
     var items: [FeedItem]
     var profiles: [Profile]
     var groups: [Group]
+    var nextFrom: String?
+    
+    static func +(lhs:FeedResponse, rhs:FeedResponse) -> FeedResponse {
+        var items: [FeedItem] = []
+        var profiles: [Profile] = []
+        var groups: [Group] = []
+        let nextFrom: String? = rhs.nextFrom
+        
+        items = lhs.items + rhs.items
+        
+        let filteredProfileRhs = lhs.profiles.filter { (oldProfile) -> Bool in
+            !rhs.profiles.contains(where: { $0.id == oldProfile.id})
+        }
+        profiles = lhs.profiles + filteredProfileRhs
+        
+        let filteredGroupsRhs = lhs.groups.filter { (oldGroup) -> Bool in
+            !rhs.groups.contains(where: { $0.id == oldGroup.id})
+        }
+        groups = lhs.groups + filteredGroupsRhs
+        
+        return FeedResponse(items: items, profiles: profiles, groups: groups, nextFrom: nextFrom)
+    }
 }
 
 struct FeedItem: Decodable {
